@@ -9,7 +9,7 @@ var defaults = {
   height: 320,
   x: 100,
   y: 100,
-  size: 20,
+  radius: 20,
   color: "green",
   dx: 2,
   dy: 2,
@@ -20,15 +20,15 @@ var defaults = {
       this.x = this.x > this.width ? 0 : this.x + this.dx;
       this.y = this.y > this.height ? 0 : this.y + this.dy;
     } else if (!warp) {
-      if (this.y + this.dy < this.size || this.y + this.size + this.dy > this.height) this.dy = -this.dy;
-      if (this.x + this.dx < this.size || this.x + this.size + this.dx > this.width) this.dx = -this.dx;
+      if (this.y + this.dy < this.radius || this.y + this.radius + this.dy > this.height) this.dy = -this.dy;
+      if (this.x + this.dx < this.radius || this.x + this.radius + this.dx > this.width) this.dx = -this.dx;
     }
     this.x += this.dx;
     this.y += this.dy;
   },
   draw: function draw(c) {
     c.beginPath();
-    c.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+    c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
     c.fillStyle = this.color;
     c.stroke();
     c.fill();
@@ -63,21 +63,33 @@ var fps = 10;
 var balls = [new _ball2.default(), new _ball2.default({
   x: 30,
   y: 30,
-  size: 30,
+  radius: 30,
   color: "pink",
   dx: 3,
   dy: 0.5
 }), new _ball2.default({
   x: 50,
   y: 50,
-  size: 10,
+  radius: 10,
   dx: 2,
   dy: 4,
   color: "tomato"
 })];
 
 function update() {
+  // clear stage
   ctx.clearRect(0, 0, width, height);
+  // collision check
+  balls.forEach(function (b, i) {
+    balls.slice(0, i).concat(balls.slice(i + 1)).forEach(function (o) {
+      var dx = b.x - o.x;
+      var dy = b.y - o.y;
+      var distance = Math.sqrt(dx * dx + dy * dy);
+      if (distance < b.radius + o.radius) {
+        console.log(b.color + " go BOOM");
+      }
+    });
+  });
   balls.forEach(function (b) {
     return b.update();
   });

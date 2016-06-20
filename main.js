@@ -13,7 +13,7 @@ var balls = [
   new Ball({
     x: 30,
     y: 30,
-    size: 30,
+    radius: 30,
     color: "pink",
     dx: 3,
     dy: 0.5
@@ -21,7 +21,7 @@ var balls = [
   new Ball({
     x: 50,
     y: 50,
-    size: 10,
+    radius: 10,
     dx: 2,
     dy: 4,
     color: "tomato"
@@ -29,7 +29,19 @@ var balls = [
 ];
 
 function update() {
+  // clear stage
   ctx.clearRect(0, 0, width, height);
+  // collision check
+  balls.forEach((b, i) => {
+    balls.slice(0,i).concat(balls.slice(i+1)).forEach(o => {
+      let dx = b.x - o.x;
+      let dy = b.y - o.y;
+      let distance = Math.sqrt(dx * dx + dy * dy);
+      if (distance < b.radius + o.radius) {
+        console.log(`${b.color} go BOOM`);
+      }
+    });
+  });
   balls.forEach(b => b.update());
 }
 

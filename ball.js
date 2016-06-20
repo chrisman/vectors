@@ -3,7 +3,7 @@ let defaults = {
   height: 320,
   x: 100,
   y: 100,
-  size: 20,
+  radius: 20,
   color: "green",
   dx: 2,
   dy: 2,
@@ -12,15 +12,15 @@ let defaults = {
       this.x = (this.x > this.width) ? 0 : this.x + this.dx;
       this.y = (this.y > this.height) ? 0 : this.y + this.dy;
     } else if (!warp) {
-      if (this.y + this.dy < this.size || this.y + this.size + this.dy > this.height) this.dy = -this.dy;
-      if (this.x + this.dx < this.size || this.x + this.size + this.dx > this.width) this.dx = -this.dx;
+      if (this.y + this.dy < this.radius || this.y + this.radius + this.dy > this.height) this.dy = -this.dy;
+      if (this.x + this.dx < this.radius || this.x + this.radius + this.dx > this.width) this.dx = -this.dx;
     }
     this.x += this.dx;
     this.y += this.dy;
   },
   draw: function(c) {
     c.beginPath();
-    c.arc(this.x, this.y, this.size, 0, Math.PI*2, false);
+    c.arc(this.x, this.y, this.radius, 0, Math.PI*2, false);
     c.fillStyle = this.color;
     c.stroke();
     c.fill();
