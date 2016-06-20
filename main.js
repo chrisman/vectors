@@ -3,6 +3,7 @@ import Subject from './subject';
 
 let collision = new Subject();
 let collisionHandler = function(e) {
+  // TODO make a better collision handler
   e.dy *= -1;
   e.dx *= -1;
 }
@@ -39,17 +40,20 @@ var balls = [
 function update() {
   // clear stage
   ctx.clearRect(0, 0, width, height);
+
   // collision check
-  balls.forEach((b, i) => {
-    balls.slice(0,i).concat(balls.slice(i+1)).forEach(o => {
+  balls.forEach(b => {
+    let allOthers = (n) => n !== b;
+    balls.filter(allOthers).forEach(o => {
       let dx = b.x - o.x;
       let dy = b.y - o.y;
-      let distance = Math.sqrt(dx * dx + dy * dy);
+      let distance = Math.sqrt(dx * dx + dy * dy); // pythagoras!
       if (distance < b.radius + o.radius) {
         collision.fire(b);
       }
     });
   });
+
   balls.forEach(b => b.update());
 }
 

@@ -58,6 +58,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var collision = new _subject2.default();
 var collisionHandler = function collisionHandler(e) {
+  // TODO make a better collision handler
   e.dy *= -1;
   e.dx *= -1;
 };
@@ -90,17 +91,22 @@ var balls = [new _ball2.default(), new _ball2.default({
 function update() {
   // clear stage
   ctx.clearRect(0, 0, width, height);
+
   // collision check
-  balls.forEach(function (b, i) {
-    balls.slice(0, i).concat(balls.slice(i + 1)).forEach(function (o) {
+  balls.forEach(function (b) {
+    var allOthers = function allOthers(n) {
+      return n !== b;
+    };
+    balls.filter(allOthers).forEach(function (o) {
       var dx = b.x - o.x;
       var dy = b.y - o.y;
-      var distance = Math.sqrt(dx * dx + dy * dy);
+      var distance = Math.sqrt(dx * dx + dy * dy); // pythagoras!
       if (distance < b.radius + o.radius) {
         collision.fire(b);
       }
     });
   });
+
   balls.forEach(function (b) {
     return b.update();
   });
