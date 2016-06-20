@@ -1,4 +1,12 @@
 import Ball from './ball';
+import Subject from './subject';
+
+let collision = new Subject();
+let collisionHandler = function(e) {
+  e.dy *= -1;
+  e.dx *= -1;
+}
+collision.subscribe(collisionHandler);
 
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
@@ -19,8 +27,8 @@ var balls = [
     dy: 0.5
   }),
   new Ball({
-    x: 50,
-    y: 50,
+    x: 80,
+    y: 30,
     radius: 10,
     dx: 2,
     dy: 4,
@@ -38,7 +46,7 @@ function update() {
       let dy = b.y - o.y;
       let distance = Math.sqrt(dx * dx + dy * dy);
       if (distance < b.radius + o.radius) {
-        console.log(`${b.color} go BOOM`);
+        collision.fire(b);
       }
     });
   });

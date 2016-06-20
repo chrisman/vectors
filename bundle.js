@@ -44,13 +44,24 @@ var Ball = function Ball() {
 exports.default = Ball;
 
 },{}],2:[function(require,module,exports){
-"use strict";
+'use strict';
 
-var _ball = require("./ball");
+var _ball = require('./ball');
 
 var _ball2 = _interopRequireDefault(_ball);
 
+var _subject = require('./subject');
+
+var _subject2 = _interopRequireDefault(_subject);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var collision = new _subject2.default();
+var collisionHandler = function collisionHandler(e) {
+  e.dy *= -1;
+  e.dx *= -1;
+};
+collision.subscribe(collisionHandler);
 
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
@@ -68,8 +79,8 @@ var balls = [new _ball2.default(), new _ball2.default({
   dx: 3,
   dy: 0.5
 }), new _ball2.default({
-  x: 50,
-  y: 50,
+  x: 80,
+  y: 30,
   radius: 10,
   dx: 2,
   dy: 4,
@@ -86,7 +97,7 @@ function update() {
       var dy = b.y - o.y;
       var distance = Math.sqrt(dx * dx + dy * dy);
       if (distance < b.radius + o.radius) {
-        console.log(b.color + " go BOOM");
+        collision.fire(b);
       }
     });
   });
@@ -107,4 +118,36 @@ function main() {
 }
 setInterval(main, fps);
 
-},{"./ball":1}]},{},[2]);
+},{"./ball":1,"./subject":3}],3:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var Subject = function Subject() {
+
+  return {
+    handlers: [], // observers
+
+    subscribe: function subscribe(fn) {
+      this.handlers.push(fn);
+    },
+
+    unsubscribe: function unsubscribe(fn) {
+      this.handlers = this.handlers.filter(function (item) {
+        return item !== fn;
+      });
+    },
+
+    fire: function fire(o, thisObj) {
+      var scope = thisObj || window;
+      this.handlers.forEach(function (item) {
+        item.call(scope, o);
+      });
+    }
+  };
+};
+
+exports.default = Subject;
+
+},{}]},{},[2]);
