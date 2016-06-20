@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "watchify main.js -o bundle.js & python -m SimpleHTTPServer"
+    "start": "watchify src/main.js -o bundle.js & python -m SimpleHTTPServer"
   },
   "author": "",
   "license": "ISC",
