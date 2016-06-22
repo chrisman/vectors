@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "watchify src/main.js -o bundle.js & python -m SimpleHTTPServer"
+    "test": "browserify spec/*spec.js | node | faucet",
+    "start": "watchify src/main.js -d -o bundle.js & python -m SimpleHTTPServer"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +13,8 @@
     "babel-preset-es2015": "^6.9.0",
     "babelify": "^7.3.0",
     "browserify": "^13.0.1",
+    "faucet": "0.0.1",
+    "tape": "^4.6.0",
     "watchify": "^3.7.0"
   },
   "browserify": {
