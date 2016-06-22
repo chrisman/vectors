@@ -52,11 +52,39 @@ tape('vector.add()', assert => {
   assert.end();
 });
 
+tape('vector.minus()', assert => {
+  let x = new Vector(10, 10);
+  let y = new Vector(5, 5);
+  let ACTUAL = x.minus(y);
+  let EXPECTED = {x: 5, y: 5}
+  assert.equal(ACTUAL.x, EXPECTED.x, 'it should subtract');
+  assert.equal(ACTUAL.y, EXPECTED.y, 'it should subtract');
+  assert.end();
+});
+
 tape('vector.mag()', assert => {
   let test = new Vector(3, 4);
   let ACTUAL = test.mag();
   let EXPECTED = 5;
   assert.equal(ACTUAL, EXPECTED, 'it should return the magnitude of a vector');
+  assert.end();
+});
+
+tape('distance bt vectors', assert => {
+  let test_a = new Vector(7, 6);
+  let test_b = new Vector(10, 10);
+  let diff = test_b.minus(test_a);
+  let ACTUAL, EXPECTED;
+
+  ACTUAL = diff;
+  EXPECTED = {x: 3, y: 4};
+  assert.equal(ACTUAL.x, EXPECTED.x, 'it should subtract');
+  assert.equal(ACTUAL.y, EXPECTED.y, 'it yhould yubtract');
+
+  ACTUAL = diff.mag();
+  EXPECTED = Math.sqrt(3*3 + 4*4);
+  assert.equal(ACTUAL, EXPECTED, 'mags equal mags');
+
   assert.end();
 });
 

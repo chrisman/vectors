@@ -5,8 +5,7 @@ import Vector from './vector';
 let collision = new Subject();
 let collisionHandler = function(e) {
   // TODO make a better collision handler
-  e.dy *= -1;
-  e.dx *= -1;
+  console.log(e.color, 'go BOOM');
 }
 collision.subscribe(collisionHandler);
 
@@ -19,6 +18,7 @@ canvas.height = height;
 var clearStage = () => ctx.clearRect(0, 0, width, height);
 var fps = 10;
 var gravity = new Vector(0, 0.01);
+var wind = new Vector(0.005, 0);
 
 var balls = [
   new Ball({
@@ -38,16 +38,25 @@ var balls = [
 ];
 
 var environment = [
-  gravity
+  gravity,
+  wind
 ];
 
 function update() {
-  // clear stage
   clearStage();
 
   balls.forEach(b => {
     environment.forEach(f => {
       b.velocity = b.velocity.add(f);
+    });
+    
+    balls.filter(others => others !== b).forEach(o => {
+      // FIXME
+      let distance = b.position.minus(o.position).mag();
+      if (distance.x <= b.radius) 
+        console.log(b.color, 'BOOM');
+      if (distance.y <= b.radius) 
+        console.log(b.color, 'BLAP');
     });
 
     b.update()
