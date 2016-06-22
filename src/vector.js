@@ -5,7 +5,7 @@ function Vector(x = 0, y = 0) {
 
 // add :: Vector -> Vector
 Vector.prototype.add = function(v) {
-  var result = new Vector(this.x, this.y);
+  let result = new Vector(this.x, this.y);
   result.x += v.x;
   result.y += v.y;
   return result;
@@ -13,7 +13,7 @@ Vector.prototype.add = function(v) {
 
 // minus :: Vector -> Vector
 Vector.prototype.minus = function(v) {
-  var result = new Vector(this.x, this.y);
+  let result = new Vector(this.x, this.y);
   result.x -= v.x;
   result.y -= v.y;
   return result;
@@ -26,8 +26,8 @@ Vector.prototype.mag = function() {
 
 // norm :: Vector -> Vector
 Vector.prototype.norm = function() {
-  var result = new Vector(this.x, this.y);
-  var mag = this.mag();
+  let result = new Vector(this.x, this.y);
+  let mag = this.mag();
   if (mag > 1) {
     result.x /= mag;
     result.y /= mag;
