@@ -3,6 +3,7 @@ function Vector(x = 0, y = 0) {
   this.y = y;
 }
 
+// add :: Vector -> Vector
 Vector.prototype.add = function(v) {
   var result = new Vector(this.x, this.y);
   result.x += v.x;
@@ -10,6 +11,7 @@ Vector.prototype.add = function(v) {
   return result;
 }
 
+// minus :: Vector -> Vector
 Vector.prototype.minus = function(v) {
   var result = new Vector(this.x, this.y);
   result.x -= v.x;
@@ -17,10 +19,12 @@ Vector.prototype.minus = function(v) {
   return result;
 }
 
+// mag :: Vector -> Number
 Vector.prototype.mag = function() {
   return Math.sqrt(this.x * this.x + this.y * this.y);
 }
 
+// norm :: Vector -> Vector
 Vector.prototype.norm = function() {
   var result = new Vector(this.x, this.y);
   var mag = this.mag();
