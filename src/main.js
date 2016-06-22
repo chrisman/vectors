@@ -4,8 +4,8 @@ import Vector from './vector';
 
 let collision = new Subject();
 let collisionHandler = function(e) {
-  // TODO make a better collision handler
-  console.log(e.color, 'go BOOM');
+  e.velocity.x *= -1;
+  e.velocity.y *= -1;
 }
 collision.subscribe(collisionHandler);
 
@@ -37,7 +37,7 @@ var balls = [
   })
 ];
 
-var environment = [
+var forces = [
   gravity,
   wind
 ];
@@ -46,17 +46,14 @@ function update() {
   clearStage();
 
   balls.forEach(b => {
-    environment.forEach(f => {
+    forces.forEach(f => {
       b.velocity = b.velocity.add(f);
     });
     
     balls.filter(others => others !== b).forEach(o => {
-      // FIXME
       let distance = b.position.minus(o.position).mag();
-      if (distance.x <= b.radius) 
-        console.log(b.color, 'BOOM');
-      if (distance.y <= b.radius) 
-        console.log(b.color, 'BLAP');
+      if (distance <= b.radius + o.radius)
+        collision.fire(b);
     });
 
     b.update()
