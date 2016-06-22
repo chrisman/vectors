@@ -1,4 +1,5 @@
-var Vector = function(x = 0, y = 0) {
+// TODO add static functions to prototype, partially apply them on return obj?
+function Vector(x = 0, y = 0) {
 
   return {
     x: x,
@@ -28,7 +29,7 @@ var Vector = function(x = 0, y = 0) {
       return result;
     },
     limit: function(max) {
-      // TODO
+      // TODO implement vector.limit()
     }
   }
 }
