@@ -1,3 +1,4 @@
+// implements Observer pattern
 var Subject = function() {
 
   return {
@@ -13,7 +14,7 @@ var Subject = function() {
 
     fire: function(o, thisObj) {
       var scope = thisObj || window;
-      this.handlers.forEach(function(item) {
+      this.handlers.forEach((item) => {
         item.call(scope, o);
       });
     }

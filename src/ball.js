@@ -3,10 +3,10 @@ import Vector from './vector';
 let defaults = {
   width: 480,
   height: 320,
-  x: 0,
-  y: 0,
   radius: 20,
   color: "green",
+  x: 0,
+  y: 0,
   dx: 0,
   dy: 0,
   update: update,

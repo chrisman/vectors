@@ -1,3 +1,4 @@
+// TODO implement mass
 import Ball from './ball';
 import Subject from './subject';
 import Vector from './vector';
@@ -9,18 +10,19 @@ let collisionHandler = function(e) {
 }
 collision.subscribe(collisionHandler);
 
-var canvas = document.getElementById("myCanvas");
-var ctx = canvas.getContext("2d");
-var width = 480;
-var height = 320;
+let canvas = document.getElementById("myCanvas");
+let ctx = canvas.getContext("2d");
+let width = 480;
+let height = 320;
 canvas.width = width;
 canvas.height = height;
-var clearStage = () => ctx.clearRect(0, 0, width, height);
-var fps = 10;
-var gravity = new Vector(0, 0.01);
-var wind = new Vector(0.005, 0);
+let fps = 10;
+let gravity = new Vector(0, 0.01);
+let wind = new Vector(0.005, 0);
+let clearStage = () => ctx.clearRect(0, 0, width, height);
 
-var balls = [
+// TODO fetch balls from jsonserver?
+let balls = [
   new Ball({
     x: width / 2,
     y: height / 2
@@ -37,7 +39,7 @@ var balls = [
   })
 ];
 
-var forces = [
+let forces = [
   gravity,
   wind
 ];
