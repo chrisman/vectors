@@ -19,6 +19,13 @@ Vector.prototype.minus = function(v) {
   return result;
 }
 
+Vector.prototype.times = function(v) {
+  let result = new Vector(this.x, this.y);
+  result.x *= v.x;
+  result.y *= v.y;
+  return result;
+}
+
 // mag :: Vector -> Number
 Vector.prototype.mag = function() {
   return Math.sqrt(this.x * this.x + this.y * this.y);

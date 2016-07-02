@@ -62,6 +62,23 @@ tape('vector.minus()', assert => {
   assert.end();
 });
 
+tape('vector.times()', assert => {
+  let x = new Vector(10, 10);
+  let y = new Vector(5, 5);
+  let ACTUAL = x.times(y);
+  let EXPECTED = {x: 50, y: 50}
+  assert.equal(ACTUAL.x, EXPECTED.x, 'it should multiply');
+  assert.equal(ACTUAL.y, EXPECTED.y, 'it should multiply');
+
+  x = new Vector(4, 4);
+  y = {x: -1, y: -1};
+  ACTUAL = x.times(y);
+  EXPECTED = {x: -4, y: -4}
+  assert.equal(ACTUAL.x, EXPECTED.x, 'it should multiply');
+  assert.equal(ACTUAL.y, EXPECTED.y, 'it should multiply');
+  assert.end();
+});
+
 tape('vector.mag()', assert => {
   let test = new Vector(3, 4);
   let ACTUAL = test.mag();
