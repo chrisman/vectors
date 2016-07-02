@@ -15,7 +15,8 @@ let defaults = {
 }
 
 function applyForce(f) {
-  this.acceleration = this.acceleration.add(f);
+  let adjustedForce = new Vector(f.x/this.mass, f.y/this.mass)
+  this.acceleration = this.acceleration.add(adjustedForce);
 }
 
 var edgeHandler = {
@@ -57,7 +58,8 @@ let Ball = (config = {}) => {
   let acceleration = new Vector(0, 0);
   result.position = position;
   result.velocity = velocity;
-  result.acceleration = acceleration
+  result.acceleration = acceleration;
+  result.mass = Math.PI * result.radius * result.radius;
 
   return result;
 }

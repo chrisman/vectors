@@ -15,4 +15,4 @@ let ballData = [
   }
 ];
 
-export default ballData
+export default ballData;
