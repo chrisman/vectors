@@ -8,8 +8,11 @@ let balls = ballData.map(b => new Ball(b));
 // collision subject / observer
 let collision = new Subject();
 let collisionHandler = function(e) {
-  const inverse = {x: -1, y: -1};
-  this.velocity = this.velocity.times(inverse);
+  // swap velocities
+  // TODO force of collision = mass * acceleration
+  let temp = e.velocity.norm();
+  e.velocity = this.velocity.norm();
+  this.velocity = temp;
 }
 collision.subscribe(collisionHandler);
 
